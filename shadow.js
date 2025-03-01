@@ -430,27 +430,7 @@ function handleBat(deltaTime) {
         bat.draw(ctx);
     }
 }
-   // Coin for hard mode
-   function generateCoin() {
-    coin = {
-        x: Math.random() * canvas.width,
-        y: Math.random() * (canvas.height - 50),
-        width: 50,
-        height: 50,
-        emoji: '💰',
-        draw: function (context) {
-            context.font = '30px Arial';
-            context.fillText(this.emoji, this.x, this.y);
-        },
-        update: function () {
-            this.x -= 3; // Move coin leftward
-            if (this.x < 0) {
-                this.x = canvas.width;
-                this.y = Math.random() * (canvas.height - 50);
-            }
-        }
-    };
-}
+
 // Game loop (animate)
 function animate(timeStamp) {
     const deltaTime = timeStamp - lastTime;
@@ -462,16 +442,9 @@ function animate(timeStamp) {
     background.update();
     player.draw(ctx);
     player.update(input, deltaTime, enemies);
-    if (quizTime === false && coin) {
-        coin.update();
-        coin.draw(ctx);
-    }
-    
     handleEnemies(deltaTime);
     handleBat(deltaTime); // This calls the bat update and render
-
     displayStatusText(ctx);
-    
     if (!gameOver) requestAnimationFrame(animate);
     }
 });
